@@ -6,4 +6,4 @@ from DAO.DAO_Utilisateur import DataAccessObjectUser
 donnees = DataAccessObjectUser().read()
 
 for ligne in donnees:
-    print(ligne)
+    print(ligne.to_string())

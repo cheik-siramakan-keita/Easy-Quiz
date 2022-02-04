@@ -54,3 +54,7 @@ class Utilisateur:
     def set_date_creation(self, date_creation: str):
         self.__date_creation = date_creation
         return
+
+    def to_string(self):
+        return f"[ID: {self.__id}, Pseudo: {self.__pseudo}, Mot de passe: {self.__mot_de_passe}, " \
+               f"Date Création: {self.__date_creation}]"

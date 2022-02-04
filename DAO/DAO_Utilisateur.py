@@ -36,10 +36,10 @@ class DataAccessObjectUser:
 
         for ligne in resultat:
             utilisateur = Utilisateur(
-                ligne['id'],
-                ligne['pseudo'],
-                ligne['mot_de_passe'],
-                ligne['date_creation']
+                ligne[0],
+                ligne[1],
+                ligne[2],
+                ligne[3]
             )
             liste_utilisateur.append(utilisateur)
 
