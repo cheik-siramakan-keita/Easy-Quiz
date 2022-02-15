@@ -58,5 +58,7 @@ class Quiz:
         return
 
     def to_string(self):
-        return f"[ID: {self.__id}, Type: {self.__type().to_string()}, Question: {self.__question}, " \
+        type = self.__type.to_string()
+
+        return f"[ID: {self.__id}, Type: {type}, Question: {self.__question}, " \
                f"Réponse: {self.__reponse}, Date Création: {self.__date_creation}]"

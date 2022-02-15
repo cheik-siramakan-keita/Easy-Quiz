@@ -18,9 +18,12 @@ class RepositoryQuiz:
         pass
 
     @staticmethod
-    def recuperer():
-        DAO = DataAccessObjectQuiz
+    def recuperer(id_type: int = None):
+        resultat = DataAccessObjectQuiz.read(id_type)
+        return resultat
 
+    @staticmethod
+    def supprimer(id: int = None):
 
         return
 

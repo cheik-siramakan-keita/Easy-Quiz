@@ -1,5 +1,5 @@
 import datetime
-from DAO.Connexion_BDD import BaseDeDonnee
+from BAO.Connexion_BDD import BaseDeDonnee
 from Classe.CLASSE_Type import Type
 
 now = datetime.date.today()
@@ -19,7 +19,7 @@ class DataAccessObjectType:
         return
 
     @staticmethod
-    def read(nom: str = None):
+    def read(id: int = None):
         bdd = BaseDeDonnee()
         connexion = bdd.connecter()
         curseur = connexion.cursor()
@@ -27,8 +27,8 @@ class DataAccessObjectType:
 
         requete = "SELECT id, nom, date_creation FROM type_quiz"
 
-        if nom is not None:
-            requete = requete + f" WHERE nom='{nom}'"
+        if id is not None:
+            requete = requete + f" WHERE id={id}"
 
         resultat = curseur.execute(requete)
         resultat = resultat.fetchall()

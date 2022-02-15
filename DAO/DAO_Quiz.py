@@ -1,5 +1,6 @@
 import datetime
-from DAO.Connexion_BDD import BaseDeDonnee
+from BAO.Connexion_BDD import BaseDeDonnee
+from Classe.CLASSE_Type import Type
 from Classe.CLASSE_Quiz import Quiz
 
 now = datetime.date.today()
@@ -12,21 +13,25 @@ class DataAccessObjectQuiz:
         connexion = bdd.connecter()
         curseur = connexion.cursor()
 
-        curseur.execute(f"INSERT INTO quiz(type, question, reponse, date_creation) "
-                        f"VALUES({quiz.get_type().get_id()},'{quiz.get_question()}', '{quiz.get_reponse()}','{now}')")
+        type = quiz.get_type()
+
+        curseur.execute(f"INSERT INTO quiz(id_type, question, reponse, date_creation) "
+                        f"VALUES({type.get_id()},'{quiz.get_question()}', '{quiz.get_reponse()}','{now}')")
 
         connexion.commit()
         connexion.close()
         return
 
     @staticmethod
-    def read(id_type: str = None):
+    def read(id_type: int = None):
         bdd = BaseDeDonnee()
         connexion = bdd.connecter()
         curseur = connexion.cursor()
         liste_quiz = []
 
-        requete = "SELECT id, id_type, question, reponse, date_creation FROM quiz"
+        requete = ("SELECT quiz.id, type_quiz.id, type_quiz.nom, type_quiz.date_creation, " 
+                   "quiz.question, quiz.reponse, quiz.date_creation FROM quiz " 
+                   "LEFT JOIN type_quiz ON quiz.id_type = type_quiz.id")
 
         if id_type is not None:
             requete = requete + f" WHERE id_type={id_type}"
@@ -35,12 +40,14 @@ class DataAccessObjectQuiz:
         resultat = resultat.fetchall()
 
         for ligne in resultat:
+            type = Type(ligne[1], ligne[2], ligne[3])
+
             quiz = Quiz(
                 ligne[0],
-                ligne[1],
-                ligne[2],
-                ligne[3],
-                ligne[4]
+                type,
+                ligne[4],
+                ligne[5],
+                ligne[6]
             )
             liste_quiz.append(quiz)
 
