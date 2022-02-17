@@ -50,8 +50,9 @@ if choix_jeux == 1:
     print(liste_num_random)
 
     index_random=0
-    i_bin=0
-    for i in range(0, len(donnees)):
+    i_bin=1
+#    for i in range(0, len(donnees)):
+    for i in range(0,5):
         ordre=liste_num_random[index_random]
         print("*** Question " + str(i_bin) + " ***")
         print(str(list_utilisateur[ordre]))
