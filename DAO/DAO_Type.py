@@ -1,5 +1,5 @@
 import datetime
-from BAO.Connexion_BDD import BaseDeDonnee
+from DAO.Connexion_BDD import BaseDeDonnee
 from Classe.CLASSE_Type import Type
 
 now = datetime.date.today()

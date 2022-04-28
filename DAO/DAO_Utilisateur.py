@@ -1,5 +1,5 @@
 import datetime
-from BAO.Connexion_BDD import BaseDeDonnee
+from DAO.Connexion_BDD import BaseDeDonnee
 from Classe.CLASSE_Utilisateur import Utilisateur
 
 now = datetime.date.today()
@@ -20,7 +20,7 @@ class DataAccessObjectUser:
         return
 
     @staticmethod
-    def read(pseudo: str = None):
+    def read(pseudo: str = None, mot_de_passe: str = None):
         bdd = BaseDeDonnee()
         connexion = bdd.connecter()
         curseur = connexion.cursor()
@@ -28,8 +28,10 @@ class DataAccessObjectUser:
 
         requete = "SELECT id, pseudo, mot_de_passe, date_creation FROM utilisateur"
 
-        if pseudo is not None:
+        if pseudo is not None and mot_de_passe is None:
             requete = requete + f" WHERE pseudo='{pseudo}'"
+        elif pseudo is not None and mot_de_passe is not None:
+            requete = requete + f" WHERE pseudo='{pseudo}' and mot_de_passe={mot_de_passe}"
 
         resultat = curseur.execute(requete)
         resultat = resultat.fetchall()

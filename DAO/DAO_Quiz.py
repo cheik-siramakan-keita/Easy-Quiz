@@ -1,5 +1,5 @@
 import datetime
-from BAO.Connexion_BDD import BaseDeDonnee
+from DAO.Connexion_BDD import BaseDeDonnee
 from Classe.CLASSE_Type import Type
 from Classe.CLASSE_Quiz import Quiz
 
@@ -35,6 +35,9 @@ class DataAccessObjectQuiz:
 
         if id_type is not None:
             requete = requete + f" WHERE id_type={id_type}"
+
+
+        requete = requete + " LIMIT 5"
 
         resultat = curseur.execute(requete)
         resultat = resultat.fetchall()

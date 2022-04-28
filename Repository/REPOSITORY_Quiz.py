@@ -1,4 +1,4 @@
-import datetime
+import datetime, random
 from DAO.DAO_Type import DataAccessObjectType
 from DAO.DAO_Quiz import DataAccessObjectQuiz
 from Classe.CLASSE_Quiz import Quiz
